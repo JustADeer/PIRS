@@ -2,7 +2,7 @@ import uvicorn
 from fastapi import FastAPI, File, UploadFile, Form, HTTPException, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from typing import List
+ 
 import datetime
 import base64
 
@@ -28,7 +28,7 @@ class ReportDataResponse(BaseModel):
         from_attributes=True
 
 class ReportListResponse(BaseModel):
-    data: List[ReportDataResponse]
+    data: list[ReportDataResponse]
     # Add other fields as needed
 
 class DelReport(BaseModel):
@@ -44,8 +44,6 @@ class GetReportData(BaseModel):
     # Add other fields as needed
     class Config:
         from_attributes=True
-
-
 
 api = FastAPI()
 
@@ -169,7 +167,7 @@ def create_database():
     c.execute("""CREATE TABLE IF NOT EXISTS report (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             photo_data BLOB NOT NULL,
-            text TEXT, 
+            text TEXT,
             latitude REAL NOT NULL,
             longitude REAL NOT NULL,
             timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
@@ -204,13 +202,6 @@ def delete_data(id):
 
 
 if __name__ == "__main__":
-    # Only run the server if the script is in the specified directory
-    EXPECTED_DIR = r"c:\Users\shaqu\Desktop\dumb projects\Untar\omura-server"
-    current_dir = os.path.dirname(os.path.abspath(__file__))
-
-    if current_dir == EXPECTED_DIR:
-        uvicorn.run(api, host="0.0.0.0", port=8000)
-        print("Checking and creating database...")
-        create_database() # Ensure the database and table exist
-    else:
-        print(f"Not starting server: current directory '{current_dir}' does not match expected '{EXPECTED_DIR}'")
+    uvicorn.run(api, host="0.0.0.0", port=8000)
+    print("Checking and creating database...")
+    create_database() # Ensure the database and table exist

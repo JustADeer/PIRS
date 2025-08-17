@@ -1,0 +1,25 @@
+[project]
+name = "omura-server"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "JustADeer",email = "shaquillesouzan3@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "fastapi (>=0.116.1,<0.117.0)",
+    "python-multipart (>=0.0.20,<0.0.21)"
+]
+
+[tool.poetry]
+package-mode = false
+
+[tool.poetry.group.dev.dependencies]
+pydantic = "^2.11.7"
+datetime = "^5.5"
+uvicorn = "0.34.2"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
